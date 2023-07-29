@@ -45,6 +45,11 @@ public class FluentMailer {
   }
 
   public FluentMailer subject(String line) {
+    try {
+      mimeMessage.setSubject(line);
+    } catch (MessagingException e) {
+      throw new RuntimeException(e);
+    }
     return this;
   }
 
