@@ -4,6 +4,7 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
+import java.util.function.Consumer;
 
 public class FluentMailer {
 
@@ -61,8 +62,9 @@ public class FluentMailer {
     return this;
   }
 
-  public void send() {
-
+  public void send(Consumer<FluentMailer> fluentMailerConsumer) {
+    FluentMailer fluentMailer = new FluentMailer();
+    fluentMailerConsumer.accept(fluentMailer);
   }
 
 
