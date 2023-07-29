@@ -1,8 +1,6 @@
 package javamail;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
@@ -10,6 +8,7 @@ import java.util.Properties;
 public class FluentMailer {
 
   private String emailFrom = "rrodriguez.julio@gmail.com";
+  String passwordFrom = "sccukptjbdbwbgty";
   private Properties properties;
   private Session session;
   private MimeMessage mimeMessage;
@@ -63,6 +62,17 @@ public class FluentMailer {
   }
 
   public void send() {
+    try {
+      Transport transport = session.getTransport("smtp");
+      transport.connect(emailFrom, passwordFrom);
+      transport.sendMessage(mimeMessage, mimeMessage.getRecipients(Message.RecipientType.TO));
+      transport.close();
+
+    } catch (NoSuchProviderException e) {
+      throw new RuntimeException(e);
+    } catch (MessagingException e) {
+      throw new RuntimeException(e);
+    }
 
   }
 
