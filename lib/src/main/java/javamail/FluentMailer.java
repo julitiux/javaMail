@@ -8,13 +8,13 @@ import java.util.function.Consumer;
 
 public class FluentMailer {
 
-  private String emailFrom = "rrodriguez.julio@gmail.com";
-  String passwordFrom = "sccukptjbdbwbgty";
-  private Properties properties;
-  private Session session;
-  private MimeMessage mimeMessage;
+  static String emailFrom = "rrodriguez.julio@gmail.com";
+  static String passwordFrom = "jvhzuggabiczgyqq";
+  private Properties properties = new Properties();
+  static Session session;
+  static MimeMessage mimeMessage;
 
-  public FluentMailer() {
+  private FluentMailer() {
     properties.put("mail.smtp.host", "smtp.gmail.com");
     properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
     properties.setProperty("mail.smtp.starttls.enable", "true");
@@ -62,13 +62,13 @@ public class FluentMailer {
     return this;
   }
 
-  public void send(Consumer<FluentMailer> fluentMailerConsumer) {
+  public static void send(Consumer<FluentMailer> fluentMailerConsumer) {
     FluentMailer fluentMailer = new FluentMailer();
     fluentMailerConsumer.accept(fluentMailer);
     sending();
   }
 
-  public void sending() {
+  private static void sending() {
     try {
       Transport transport = session.getTransport("smtp");
       transport.connect(emailFrom, passwordFrom);
