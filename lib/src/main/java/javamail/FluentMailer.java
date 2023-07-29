@@ -54,6 +54,11 @@ public class FluentMailer {
   }
 
   public FluentMailer body(String message) {
+    try {
+      mimeMessage.setText(message, "ISO-8859-1", "html");
+    } catch (MessagingException e) {
+      throw new RuntimeException(e);
+    }
     return this;
   }
 
