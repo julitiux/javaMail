@@ -9,6 +9,7 @@ public class FluentMailer {
   private String emailFrom = "rrodriguez.julio@gmail.com";
   private Properties properties;
   private Session session;
+  private MimeMessage mimeMessage;
 
   public FluentMailer() {
     properties.put("mail.smtp.host", "smtp.gmail.com");
@@ -18,8 +19,8 @@ public class FluentMailer {
     properties.setProperty("mail.smtp.user", emailFrom);
     properties.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
     properties.setProperty("mail.smtp.auth", "true");
-
     session = Session.getDefaultInstance(properties);
+    mimeMessage = new MimeMessage(session);
   }
 
   public FluentMailer from(String address) {
