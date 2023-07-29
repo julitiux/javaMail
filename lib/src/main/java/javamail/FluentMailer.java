@@ -1,5 +1,6 @@
 package javamail;
 
+import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
@@ -35,6 +36,11 @@ public class FluentMailer {
   }
 
   public FluentMailer to(String address) {
+    try {
+      mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(address));
+    } catch (MessagingException e) {
+      throw new RuntimeException(e);
+    }
     return this;
   }
 
