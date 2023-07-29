@@ -62,6 +62,11 @@ public class FluentMailer {
   }
 
   public void send() {
+
+  }
+
+
+  public void sending(){
     try {
       Transport transport = session.getTransport("smtp");
       transport.connect(emailFrom, passwordFrom);
@@ -73,7 +78,6 @@ public class FluentMailer {
     } catch (MessagingException e) {
       throw new RuntimeException(e);
     }
-
   }
 
 }
