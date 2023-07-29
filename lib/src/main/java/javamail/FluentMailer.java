@@ -65,10 +65,10 @@ public class FluentMailer {
   public void send(Consumer<FluentMailer> fluentMailerConsumer) {
     FluentMailer fluentMailer = new FluentMailer();
     fluentMailerConsumer.accept(fluentMailer);
+    sending();
   }
 
-
-  public void sending(){
+  public void sending() {
     try {
       Transport transport = session.getTransport("smtp");
       transport.connect(emailFrom, passwordFrom);
