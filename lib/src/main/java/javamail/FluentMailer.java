@@ -3,6 +3,7 @@ package javamail;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.function.Consumer;
 
@@ -27,8 +28,9 @@ public class FluentMailer {
   }
 
   public FluentMailer from(String address) {
+    Optional<String> optionalAddress = Optional.ofNullable(address);
     try {
-      mimeMessage.setFrom(new InternetAddress(address));
+      mimeMessage.setFrom(new InternetAddress(optionalAddress.orElse(emailFrom)));
     } catch (MessagingException e) {
       throw new RuntimeException(e);
     }
