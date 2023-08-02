@@ -3,6 +3,7 @@ package javamail;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.function.Consumer;
@@ -10,7 +11,7 @@ import java.util.function.Consumer;
 public class FluentMailer {
 
   final static String emailFrom = "rrodriguez.julio@gmail.com";
-  final static String passwordFrom = "jvhzuggabiczgyqq";
+  final static String passwordFrom = "erwfqldtgkkxnrar";
   private Properties properties = new Properties();
   private static Session session;
   private static MimeMessage mimeMessage;
@@ -38,8 +39,10 @@ public class FluentMailer {
   }
 
   public FluentMailer to(String address) {
+    Optional<String> optionalAddress = Optional.ofNullable(address);
+    optionalAddress.orElseThrow(NoSuchElementException::new);
     try {
-      mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(address));
+      mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(optionalAddress.get()));
     } catch (MessagingException e) {
       throw new RuntimeException(e);
     }
