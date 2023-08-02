@@ -1,9 +1,19 @@
 package javamail;
 
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
+
 public class MailBuilder {
 
+  final static String emailFrom = "rrodriguez.julio@gmail.com";
+  final static String passwordFrom = "erwfqldtgkkxnrar";
+  private Properties properties = new Properties();
+  private static Session session;
+  private static MimeMessage mimeMessage;
+
   private MailBuilder() {
-    
+
   }
 
 
