@@ -8,11 +8,11 @@ import java.util.function.Consumer;
 
 public class FluentMailer {
 
-  static String emailFrom = "rrodriguez.julio@gmail.com";
-  static String passwordFrom = "jvhzuggabiczgyqq";
+  final static String emailFrom = "rrodriguez.julio@gmail.com";
+  final static String passwordFrom = "jvhzuggabiczgyqq";
   private Properties properties = new Properties();
-  static Session session;
-  static MimeMessage mimeMessage;
+  private static Session session;
+  private static MimeMessage mimeMessage;
 
   private FluentMailer() {
     properties.put("mail.smtp.host", "smtp.gmail.com");
