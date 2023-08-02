@@ -50,8 +50,9 @@ public class FluentMailer {
   }
 
   public FluentMailer subject(String line) {
+    Optional<String> optionalSubject = Optional.ofNullable(line);
     try {
-      mimeMessage.setSubject(line);
+      mimeMessage.setSubject(optionalSubject.orElse("(No Subject)"));
     } catch (MessagingException e) {
       throw new RuntimeException(e);
     }
