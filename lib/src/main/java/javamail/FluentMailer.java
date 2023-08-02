@@ -60,8 +60,9 @@ public class FluentMailer {
   }
 
   public FluentMailer body(String message) {
+    Optional<String> optionalBody = Optional.ofNullable(message);
     try {
-      mimeMessage.setText(message, "ISO-8859-1", "html");
+      mimeMessage.setText(optionalBody.orElse("No Content"), "ISO-8859-1", "html");
     } catch (MessagingException e) {
       throw new RuntimeException(e);
     }
