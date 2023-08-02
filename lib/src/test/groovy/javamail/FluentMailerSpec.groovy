@@ -7,11 +7,14 @@ class FluentMailerSpec extends Specification {
   def "FluentMaile test"() {
     expect:
     FluentMailer.send(mailer -> mailer
-      .from("rrodriguez.julio@gmail.com")
-      .to("rrodriguez.julio@gmail.com")
-      .subject("THIS IS A TEST FROM HELL")
-      .body("OH YEAH !")
+      .from(_from)
+      .to(_to)
+      .subject(_subject)
+      .body(_body)
     )
+    where:
+    _from                        | _to                          | _subject                   | _body
+    "rrodriguez.julio@gmail.com" | "rrodriguez.julio@gmail.com" | "THIS IS A TEST FROM HELL" | "OH YEAH !"
   }
 
 }
