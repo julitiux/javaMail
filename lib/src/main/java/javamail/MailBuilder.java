@@ -1,8 +1,6 @@
 package javamail;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.NoSuchElementException;
@@ -72,6 +70,15 @@ public class MailBuilder {
   }
 
   public void send() {
-    System.out.println("sending...");
+    try {
+      Transport transport = session.getTransport("smtp");
+      transport.connect(emailFrom, passwordFrom);
+      transport.sendMessage(mimeMessage, mimeMessage.getRecipients(Message.RecipientType.TO));
+      transport.close();
+    } catch (NoSuchProviderException e) {
+      throw new RuntimeException(e);
+    } catch (MessagingException e) {
+      throw new RuntimeException(e);
+    }
   }
 }
