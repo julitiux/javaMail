@@ -1,7 +1,10 @@
 package javamail;
 
+import javax.mail.MessagingException;
 import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.Optional;
 import java.util.Properties;
 
 public class MailBuilder {
@@ -26,6 +29,12 @@ public class MailBuilder {
 
 
   public MailBuilder from(final String address) {
+    Optional<String> optionalAddress = Optional.ofNullable(address);
+    try {
+      mimeMessage.setFrom(new InternetAddress(optionalAddress.orElse(emailFrom)));
+    } catch (MessagingException e) {
+      throw new RuntimeException(e);
+    }
     return this;
   }
 
