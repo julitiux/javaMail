@@ -1,9 +1,11 @@
 package javamail;
 
+import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -39,6 +41,13 @@ public class MailBuilder {
   }
 
   public MailBuilder to(final String address) {
+    Optional<String> optionalAddress = Optional.ofNullable(address);
+    optionalAddress.orElseThrow(NoSuchElementException::new);
+    try {
+      mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(optionalAddress.get()));
+    } catch (MessagingException e) {
+      throw new RuntimeException(e);
+    }
     return this;
   }
 
