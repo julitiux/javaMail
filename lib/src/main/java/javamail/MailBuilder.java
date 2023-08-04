@@ -15,7 +15,7 @@ public class MailBuilder {
   private static Session session;
   private static MimeMessage mimeMessage;
 
-  private MailBuilder() {
+  public MailBuilder() {
     properties.put("mail.smtp.host", "smtp.gmail.com");
     properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
     properties.setProperty("mail.smtp.starttls.enable", "true");
