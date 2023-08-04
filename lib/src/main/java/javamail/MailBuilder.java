@@ -62,6 +62,12 @@ public class MailBuilder {
   }
 
   public MailBuilder body(final String message) {
+    Optional<String> optionalBody = Optional.ofNullable(message);
+    try {
+      mimeMessage.setText(optionalBody.orElse("No Content"), "ISO-8859-1", "html");
+    } catch (MessagingException e) {
+      throw new RuntimeException(e);
+    }
     return this;
   }
 
