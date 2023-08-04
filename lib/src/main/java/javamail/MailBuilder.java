@@ -52,6 +52,12 @@ public class MailBuilder {
   }
 
   public MailBuilder subject(final String line) {
+    Optional<String> optionalSubject = Optional.ofNullable(line);
+    try {
+      mimeMessage.setSubject(optionalSubject.orElse("(No Subject)"));
+    } catch (MessagingException e) {
+      throw new RuntimeException(e);
+    }
     return this;
   }
 
